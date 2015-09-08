@@ -1,15 +1,21 @@
 {
   "name": "SFlog",
   "version": "1.0.0",
-  "description": "",
+  "description": "SFlog tail log file for Salesforce",
   "main": "sflog.js",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:liratanak/sflog.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^2.9.34",
     "captains-log": "^0.11.11",
-    "jsforce": "^1.5.0"
+    "jsforce": "^1.5.0",
+    "lodash": "^3.10.1"
   }
 }
