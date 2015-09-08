@@ -1,0 +1,15 @@
+{
+  "name": "SFlog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sflog.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "captains-log": "^0.11.11",
+    "jsforce": "^1.5.0"
+  }
+}
