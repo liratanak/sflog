@@ -1,0 +1,9 @@
+{
+  "org": {
+    "username": "",
+    "password": "",
+    "secretToken": ""
+  },
+  "logPrefix": "SFLog ",
+  "timeout": 2000
+}
