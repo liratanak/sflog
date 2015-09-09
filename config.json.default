@@ -1,8 +1,11 @@
 {
   "org": {
     "username": "",
-    "password": "",
-    "secretToken": ""
+    "password": ""
+  },
+  "org1": {
+    "username": "",
+    "password": ""
   },
   "logPrefix": "SFLog ",
   "timeout": 2000
