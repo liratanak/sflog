@@ -1,10 +1,17 @@
 #sflog
 
-#Installation
+##What ?
+
+`sflog` want to have feature like tail log in apache/nginx/heroku as currently(2015-09-10) Force.com cli do not provide this feature yet.
+
+##Installation
 
 	npm -g install sflog
 
-#Usage
+##Usage
+
+just add `Monitored User` as normal
+     Setup => Logs => Debug Logs => Monitored Users => New 
 
     Usage: sflog [options]
     
@@ -24,7 +31,7 @@
       --verbose                         Set log level to verbose
       --silent                          Set log level to silent
 
-#Usage Example
+##Usage Example
 
 config.json
 ```json
@@ -44,6 +51,10 @@ config.json
 	sflog -c ./config.json --org devOrg
 
 	sflog -c ./config.json --org sandbox001
+
+If current directory is a MavensMate project ( `./config/.session` )
+
+	sflog --mm
 
 
 
