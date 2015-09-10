@@ -7,6 +7,5 @@
     "instanceUrl": "",
     "accessToken": ""
   },
-  "logPrefix": "SFLog ",
   "pullingInterval": 5000
 }

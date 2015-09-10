@@ -1,5 +1,5 @@
 {
-  "name": "SFlog",
+  "name": "sflog",
   "version": "1.0.0",
   "description": "SFlog tail log file for Salesforce",
   "main": "sflog.js",
@@ -10,7 +10,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": {
+    "name": "Liratanak",
+    "email": "annliratanak@gmail.com"
+  },
+  "bin": {
+    "sflog": "./sflog.js"
+  },
   "license": "ISC",
   "dependencies": {
     "bluebird": "^2.9.34",

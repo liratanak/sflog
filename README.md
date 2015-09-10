@@ -37,7 +37,6 @@ config.json
     "instanceUrl": "https://ap2.salesforce.com",
     "accessToken": "somevalidsessionid"
   },
-  "logPrefix": "SFLog ",
   "pullingInterval": 5000
 }
 ```
