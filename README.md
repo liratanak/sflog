@@ -4,6 +4,22 @@
 
 `sflog` want to have feature like tail log in apache/nginx/heroku as currently(2015-09-10) Force.com cli do not provide this feature yet.
 
+Sample Output
+
+    ➜  SomeMavensMateProject  sflog --mm | grep -E "sflog|USER|ERROR"
+    sflog: info: Authenticating ...
+    sflog: info: Authenticated as user@domain.com
+    sflog: info: Pulling log every 5000ms ...
+    sflog: info: got 1 new log
+    sflog: info: id:  ["07L28000008eDCuEAM"]
+    05:02:23.029 (29105519)|USER_DEBUG|[6]|DEBUG|Spd: startAction ApexPages.currentPage().getParameters()
+    05:02:23.029 (29316609)|USER_DEBUG|[7]|DEBUG|{hello=world}
+    
+    sflog: info: got 1 new log
+    sflog: info: id:  ["07L28000008eDDEEA2"]
+    05:02:39.026 (26921190)|USER_DEBUG|[6]|DEBUG|Spd: startAction ApexPages.currentPage().getParameters()
+    05:02:39.027 (27146967)|USER_DEBUG|[7]|DEBUG|{hello=speeder}
+
 ##Installation
 
 	npm -g install sflog
