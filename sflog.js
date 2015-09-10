@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict';
 
 /**
  * SFlog
@@ -8,8 +9,8 @@ var _ = require('lodash');
 
 var force = require('./lib/force');
 var log = require('./lib/util/log');
-var config = require('./config.json');
 var SFLog = require('./lib/sflog');
+var path = require('path');
 
 app
 	.version('0.0.1')
@@ -20,6 +21,7 @@ app
 	.option('-i, --instance-url [instanceUrl]', 'jsforce\'s instanceUrl see: https://jsforce.github.io/document/#access-token')
 	.option('-a, --access-token [accessToken]', 'jsforce\'s accessToken see: https://jsforce.github.io/document/#access-token')
 	.option('-m, --mm [path]', 'Using MaventsMate session file')
+	.option('--pulling-interval [interval]', 'Pulling interval in milliseconds should >= 1000', parseInt)
 	.option('--silly', 'Set log level to silly')
 	.option('--verbose', 'Set log level to verbose')
 	.option('--silent', 'Set log level to silent')
@@ -29,17 +31,22 @@ log.silly( 'app: ', app );
 
 var org = app.org;
 var isValidAuth = false;
+
+var config = {};
 var usableConfig = {};
 
 if( typeof app.config === 'string' ) {
 	try {
-		config = _.assign(config, JSON.parse( require("fs").readFileSync( app.config ) ));
+		var configPath = path.resolve(app.config);
+		log.silly( 'configPath: ', configPath );
+
+		config = _.assign(config, JSON.parse( require("fs").readFileSync( configPath ) ) );
 	} catch( e ) {
 		log.error( 'Not found/Invalid config file in ' + app.config );
 	}
 }
 
-config[org] = config[org] || {};
+config[org] = ( config[org] || {} );
 
 // Default options
 usableConfig = _.assign({
@@ -47,14 +54,19 @@ usableConfig = _.assign({
 	pullingInterval: 5000
 }, config);
 
+// 1s
+if( typeof app.pullingInterval === 'number' && app.pullingInterval >= 1000 ) {
+	usableConfig.pullingInterval = app.pullingInterval;
+}
+
 // MavensMate session id and instance url
 var mm = {};
 var mmSessionFilePath = null;
 
 if( typeof app.mm === 'boolean' ) {
-	mmSessionFilePath = process.cwd() + '/config/.session';
+	mmSessionFilePath = path.resolve('./config/.session');
 } else if ( typeof app.mm === 'string' ) {
-	mmSessionFilePath = app.mm;
+	mmSessionFilePath = path.resolve(app.mm);
 }
 
 if( app.mm ) {
@@ -84,7 +96,7 @@ usableConfig[org] = {
 	accessToken: app.accessToken || mm['accessToken'] || config[org]['accessToken'] || ''
 };
 
-log.silly( 'org: usableConfig[org]: ', org, usableConfig[org] );
+log.silly( 'org: usableConfig: ', org, usableConfig );
 
 // TODO: Check for valid format
 if( !_.isEmpty( usableConfig[org].username ) && !_.isEmpty( usableConfig[org].password ) ) {
