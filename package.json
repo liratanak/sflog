@@ -1,6 +1,6 @@
 {
   "name": "sflog",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "SFlog tail log file for Salesforce",
   "main": "sflog.js",
   "repository": {
@@ -16,6 +16,10 @@
   },
   "bin": {
     "sflog": "./sflog.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:liratanak/sflog.git"
   },
   "license": "ISC",
   "dependencies": {
