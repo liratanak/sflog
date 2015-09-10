@@ -4,9 +4,9 @@
     "password": ""
   },
   "org1": {
-    "username": "",
-    "password": ""
+    "instanceUrl": "",
+    "accessToken": ""
   },
   "logPrefix": "SFLog ",
-  "timeout": 2000
+  "pullingInterval": 5000
 }
