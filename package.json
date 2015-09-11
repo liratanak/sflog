@@ -1,7 +1,7 @@
 {
   "name": "sflog",
   "version": "0.0.1",
-  "description": "SFlog tail log file for Salesforce",
+  "description": "sflog: tail log for Force.com",
   "main": "sflog.js",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "type": "git",
     "url": "git@github.com:liratanak/sflog.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^2.9.34",
     "captains-log": "^0.11.11",

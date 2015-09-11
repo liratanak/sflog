@@ -1,8 +1,10 @@
-#sflog
+# sflog
+tail log for Force.com 
 
-##What ?
 
-`sflog` want to have feature like tail log in apache/nginx/heroku as currently(2015-09-10) Force.com cli do not provide this feature yet.
+### What ?
+
+`sflog` want to have feature like tail log in `apache`/`nginx`/`heroku` as currently(2015-09-10) Force.com CLI do not provide this feature yet.
 
 Sample Output
 
@@ -20,11 +22,11 @@ Sample Output
     05:02:39.026 (26921190)|USER_DEBUG|[6]|DEBUG|Spd: startAction ApexPages.currentPage().getParameters()
     05:02:39.027 (27146967)|USER_DEBUG|[7]|DEBUG|{hello=speeder}
 
-##Installation
+### Installation
 
 	npm -g install sflog
 
-##Usage
+### Usage
 
 just add `Monitored User` as normal
      Setup => Logs => Debug Logs => Monitored Users => New 
@@ -47,7 +49,7 @@ just add `Monitored User` as normal
       --verbose                         Set log level to verbose
       --silent                          Set log level to silent
 
-##Usage Example
+### Usage Example
 
 config.json
 ```json
