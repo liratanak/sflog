@@ -1,6 +1,6 @@
 {
   "name": "sflog",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "sflog: tail log for Force.com",
   "main": "sflog.js",
   "repository": {
