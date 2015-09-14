@@ -1,6 +1,6 @@
 {
   "name": "sflog",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "sflog: tail log for Force.com",
   "main": "sflog.js",
   "repository": {
@@ -10,6 +10,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "force.com",
+    "force",
+    "tail",
+    "log"
+  ],
   "author": {
     "name": "Liratanak",
     "email": "annliratanak@gmail.com"
