@@ -83,7 +83,13 @@ if( app.mm ) {
 	} catch( e ) {
 		// Ignore if not exist or error
 		// log.error( e );
-		log.error( 'Not found/Invalid MavensMate session file in ' + mmSessionFilePath );
+
+		if( typeof mmSession.accessToken !== 'undefined' 
+			&& typeof mmSession.instanceUrl !== 'undefined' ) {
+			mm = mmSession;
+		}
+
+		// log.error( 'Not found/Invalid MavensMate session file in ' + mmSessionFilePath );
 	}
 }
 
