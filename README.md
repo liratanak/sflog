@@ -4,7 +4,7 @@ tail log for Force.com
 
 ### What ?
 
-`sflog` want to have feature like tail log in `apache`/`nginx`/`heroku` as currently(2015-09-10) Force.com CLI do not provide this feature yet.
+`sflog` want to have feature like tail log in `apache`/`nginx`/`heroku` as currently(2015-09-10) Force.com CLI do not provide this feature yet, see [#200](https://github.com/heroku/force/issues/200)
 
 Sample Output
 
