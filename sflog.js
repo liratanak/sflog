@@ -20,7 +20,7 @@ app
 	.option('-p, --password [password]', 'Password concat with token')
 	.option('-i, --instance-url [instanceUrl]', 'jsforce\'s instanceUrl see: https://jsforce.github.io/document/#access-token')
 	.option('-a, --access-token [accessToken]', 'jsforce\'s accessToken see: https://jsforce.github.io/document/#access-token')
-	.option('-m, --mm [path]', 'Using MaventsMate session file')
+	.option('--forcecode [path]', 'Using ForceCode config file')
 	.option('--pulling-interval [interval]', 'Pulling interval in milliseconds should >= 1000', parseInt)
 	.option('--silly', 'Set log level to silly')
 	.option('--verbose', 'Set log level to verbose')
@@ -29,7 +29,7 @@ app
 
 log.silly( 'app: ', app );
 
-var org = app.org;
+var org = app.org || 'dev';
 var isValidAuth = false;
 
 var config = {};
@@ -59,47 +59,43 @@ if( typeof app.pullingInterval === 'number' && app.pullingInterval >= 1000 ) {
 	usableConfig.pullingInterval = app.pullingInterval;
 }
 
-// MavensMate session id and instance url
-var mm = {};
-var mmSessionFilePath = null;
+// ForceCode
+var forcecodeConfig = {};
+var forcecodeConfigPath = null;
 
-if( typeof app.mm === 'boolean' ) {
-	mmSessionFilePath = path.resolve('./config/.session');
-} else if ( typeof app.mm === 'string' ) {
-	mmSessionFilePath = path.resolve(app.mm);
+if( typeof app.forcecode === 'boolean' ) {
+	forcecodeConfigPath = path.resolve('./force.json');
+} else if ( typeof app.forcecode === 'string' ) {
+	forcecodeConfigPath = path.resolve(app.forcecode);
 }
 
-if( app.mm ) {
+log.silly( 'app.forcecode: ', app.forcecode );
+if( app.forcecode ) {
 	try {
 		var fs = require("fs");
-		var mmSession = JSON.parse( fs.readFileSync( mmSessionFilePath ) );
+		var forcecodeConfigJson = JSON.parse( fs.readFileSync( forcecodeConfigPath ) );
 
-		mm = {
-			instanceUrl: mmSession.server_url.replace(/\/services.*/, ''),
-			accessToken: mmSession.sid
+		forcecodeConfig = {
+			loginUrl: forcecodeConfigJson.url,
+			username: forcecodeConfigJson.username,
+			password: forcecodeConfigJson.password
 		};
 
-		log.silly( 'mmSession: ', mmSession, mm );
+		log.silly( 'forcecodeConfig: ', forcecodeConfig );
 	} catch( e ) {
 		// Ignore if not exist or error
-		// log.error( e );
-
-		if( typeof mmSession.accessToken !== 'undefined' 
-			&& typeof mmSession.instanceUrl !== 'undefined' ) {
-			mm = mmSession;
-		}
-
-		// log.error( 'Not found/Invalid MavensMate session file in ' + mmSessionFilePath );
+		log.error( e );
+		// log.error( 'Not found/Invalid MavensMate session file in ' + forcecodeConfigPath );
 	}
 }
 
-// END MavensMate
-
+// END ForceCode
 usableConfig[org] = {
-	username: app.username || config[org]['username'] || '',
-	password: app.password || config[org]['password'] || '',
-	instanceUrl: app.instanceUrl || mm['instanceUrl'] || config[org]['instanceUrl'] || '',
-	accessToken: app.accessToken || mm['accessToken'] || config[org]['accessToken'] || ''
+	loginUrl: forcecodeConfig['loginUrl'] || null,
+	username: app.username || config[org]['username'] || forcecodeConfig['username'] || null,
+	password: app.password || config[org]['password'] || forcecodeConfig['password'] || null,
+	instanceUrl: app.instanceUrl || config[org]['instanceUrl'] || null,
+	accessToken: app.accessToken || config[org]['accessToken'] || null
 };
 
 log.silly( 'org: usableConfig: ', org, usableConfig );
@@ -123,6 +119,7 @@ if( !isValidAuth ) {
 
 log.info('Authenticating ...');
 force.auth.login({
+	loginUrl: usableConfig[org].loginUrl,
 	username: usableConfig[org].username,
 	passwordToken: usableConfig[org].password,
 	instanceUrl: usableConfig[org].instanceUrl,

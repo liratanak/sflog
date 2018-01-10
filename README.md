@@ -8,7 +8,7 @@ tail log for Force.com
 
 Sample Output
 
-    ➜  SomeMavensMateProject  sflog --mm | grep -E "sflog|USER|ERROR"
+    ➜  SomeForceCodeProject  sflog --forcecode | grep -E "sflog|USER|ERROR"
     sflog: info: Authenticating ...
     sflog: info: Authenticated as user@domain.com
     sflog: info: Pulling log every 5000ms ...
@@ -43,7 +43,7 @@ just add `Monitored User` as normal
       -p, --password [password]         Password concat with token
       -i, --instance-url [instanceUrl]  jsforce's instanceUrl see: https://jsforce.github.io/document/#access-token
       -a, --access-token [accessToken]  jsforce's accessToken see: https://jsforce.github.io/document/#access-token
-      -m, --mm [path]                   Using MaventsMate session file
+      -m, --forcecode [path]                   Using MaventsMate session file
       --pulling-interval [interval]     Pulling interval in milliseconds should >= 1000
       --silly                           Set log level to silly
       --verbose                         Set log level to verbose
@@ -70,9 +70,9 @@ config.json
 
 	sflog -c ./config.json --org sandbox001
 
-If current directory is a MavensMate project ( `./config/.session` )
+If current directory is a ForceCode project ( `./force.json` )
 
-	sflog --mm
+	sflog --forcecode
 
 
 
